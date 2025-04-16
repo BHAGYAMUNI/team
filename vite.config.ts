@@ -9,6 +9,18 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  build: {
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui-vendor': ['@radix-ui/react-*', 'lucide-react'],
+          'utils-vendor': ['date-fns', 'zod', 'react-hook-form'],
+        },
+      },
+    },
+  },
   plugins: [
     react(),
     mode === 'development' &&

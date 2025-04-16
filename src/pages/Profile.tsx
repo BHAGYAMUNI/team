@@ -618,10 +618,10 @@ const Profile = () => {
                       ))}
                     </div>
                   ) : (
-                    <div className="text-center py-12">
-                      <p className="text-muted-foreground mb-6">
+                <div className="text-center py-12">
+                  <p className="text-muted-foreground mb-6">
                         No projects added yet. Click "Add Project" to upload your project files.
-                      </p>
+                  </p>
                     </div>
                   )}
                 </div>
