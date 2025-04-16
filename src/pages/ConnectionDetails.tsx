@@ -7,70 +7,349 @@ import { useState } from "react";
 const mockProfiles = [
   {
     id: "1",
-    name: "John Doe",
-    bio: "Full-stack developer with 5 years of experience. Passionate about building scalable web applications and contributing to open source projects.",
+    name: "Alex Johnson",
+    bio: "Full-stack developer with 3 years of experience. Love building innovative solutions at hackathons.",
     avatar: "https://i.pravatar.cc/150?img=1",
-    skills: ["React", "Node.js", "TypeScript", "Python", "AWS"],
-    techStack: ["MERN Stack", "Docker", "Kubernetes"],
+    skills: ["React", "Node.js", "MongoDB"],
+    techStack: ["MERN", "Firebase"],
     location: "San Francisco, CA",
     openToCollaborate: true,
     status: "online"
   },
   {
     id: "2",
-    name: "Jane Smith",
-    bio: "Frontend developer specializing in React and TypeScript. Love creating beautiful and accessible user interfaces.",
-    avatar: "https://i.pravatar.cc/150?img=2",
-    skills: ["React", "TypeScript", "CSS", "UI/UX Design"],
-    techStack: ["Next.js", "Tailwind CSS", "Figma"],
+    name: "Samantha Lee",
+    bio: "UX/UI designer passionate about creating beautiful and functional interfaces.",
+    avatar: "https://i.pravatar.cc/150?img=5",
+    skills: ["UI Design", "Figma", "User Research"],
+    techStack: ["Adobe XD", "Sketch"],
     location: "New York, NY",
+    openToCollaborate: true,
+    status: "offline"
+  },
+  {
+    id: "3",
+    name: "David Chen",
+    bio: "Backend developer specialized in scalable APIs and database optimization.",
+    avatar: "https://i.pravatar.cc/150?img=3",
+    skills: ["Python", "Django", "PostgreSQL"],
+    techStack: ["AWS", "Docker"],
+    location: "Austin, TX",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "4",
+    name: "Emma Wilson",
+    bio: "Data scientist with a background in machine learning and AI applications.",
+    avatar: "https://i.pravatar.cc/150?img=9",
+    skills: ["Python", "TensorFlow", "Data Analysis"],
+    techStack: ["Jupyter", "Scikit-learn"],
+    location: "Seattle, WA",
+    openToCollaborate: false,
+    status: "offline"
+  },
+  {
+    id: "5",
+    name: "Michael Brown",
+    bio: "Mobile app developer with expertise in React Native and Flutter.",
+    avatar: "https://i.pravatar.cc/150?img=11",
+    skills: ["React Native", "Flutter", "Mobile UI"],
+    techStack: ["Firebase", "Redux"],
+    location: "Chicago, IL",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "6",
+    name: "Sarah Martinez",
+    bio: "DevOps engineer focused on cloud infrastructure and CI/CD pipelines.",
+    avatar: "https://i.pravatar.cc/150?img=12",
+    skills: ["AWS", "Docker", "Kubernetes"],
+    techStack: ["Terraform", "Jenkins"],
+    location: "Boston, MA",
+    openToCollaborate: true,
+    status: "offline"
+  },
+  {
+    id: "7",
+    name: "James Wilson",
+    bio: "Blockchain developer with experience in smart contracts and DApps.",
+    avatar: "https://i.pravatar.cc/150?img=13",
+    skills: ["Solidity", "Web3.js", "Ethereum"],
+    techStack: ["Truffle", "Ganache"],
+    location: "Denver, CO",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "8",
+    name: "Lisa Chen",
+    bio: "AI/ML engineer specializing in natural language processing.",
+    avatar: "https://i.pravatar.cc/150?img=14",
+    skills: ["Python", "TensorFlow", "NLP"],
+    techStack: ["PyTorch", "Hugging Face"],
+    location: "Los Angeles, CA",
+    openToCollaborate: true,
+    status: "offline"
+  },
+  {
+    id: "9",
+    name: "Robert Garcia",
+    bio: "Game developer with experience in Unity and Unreal Engine.",
+    avatar: "https://i.pravatar.cc/150?img=15",
+    skills: ["Unity", "C#", "Game Design"],
+    techStack: ["Unreal Engine", "Blender"],
+    location: "Austin, TX",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "10",
+    name: "Olivia Thompson",
+    bio: "Cybersecurity specialist with expertise in penetration testing.",
+    avatar: "https://i.pravatar.cc/150?img=16",
+    skills: ["Security", "Ethical Hacking", "Network Security"],
+    techStack: ["Kali Linux", "Wireshark"],
+    location: "Washington, DC",
+    openToCollaborate: true,
+    status: "offline"
+  },
+  {
+    id: "11",
+    name: "Daniel Kim",
+    bio: "Cloud architect specializing in AWS and Azure solutions.",
+    avatar: "https://i.pravatar.cc/150?img=17",
+    skills: ["AWS", "Azure", "Cloud Architecture"],
+    techStack: ["Terraform", "Kubernetes"],
+    location: "Seattle, WA",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "12",
+    name: "Sophia Rodriguez",
+    bio: "Data engineer focused on big data processing and analytics.",
+    avatar: "https://i.pravatar.cc/150?img=18",
+    skills: ["Python", "Spark", "Data Engineering"],
+    techStack: ["Hadoop", "Airflow"],
+    location: "New York, NY",
+    openToCollaborate: true,
+    status: "offline"
+  },
+  {
+    id: "13",
+    name: "William Chen",
+    bio: "Full-stack developer with expertise in modern web technologies.",
+    avatar: "https://i.pravatar.cc/150?img=19",
+    skills: ["React", "Node.js", "TypeScript"],
+    techStack: ["Next.js", "GraphQL"],
+    location: "San Francisco, CA",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "14",
+    name: "Ava Patel",
+    bio: "Mobile developer specializing in iOS and Android applications.",
+    avatar: "https://i.pravatar.cc/150?img=20",
+    skills: ["Swift", "Kotlin", "Mobile Development"],
+    techStack: ["Xcode", "Android Studio"],
+    location: "Chicago, IL",
+    openToCollaborate: true,
+    status: "offline"
+  },
+  {
+    id: "15",
+    name: "Ethan Wilson",
+    bio: "DevOps engineer with focus on automation and infrastructure.",
+    avatar: "https://i.pravatar.cc/150?img=21",
+    skills: ["Docker", "Kubernetes", "CI/CD"],
+    techStack: ["Jenkins", "Ansible"],
+    location: "Austin, TX",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "16",
+    name: "Mia Anderson",
+    bio: "Frontend developer passionate about creating responsive web applications.",
+    avatar: "https://i.pravatar.cc/150?img=22",
+    skills: ["React", "TypeScript", "CSS"],
+    techStack: ["Next.js", "Tailwind CSS"],
+    location: "Los Angeles, CA",
+    openToCollaborate: true,
+    status: "offline"
+  },
+  {
+    id: "17",
+    name: "Noah Taylor",
+    bio: "Backend developer specializing in microservices architecture.",
+    avatar: "https://i.pravatar.cc/150?img=23",
+    skills: ["Java", "Spring Boot", "Microservices"],
+    techStack: ["Docker", "Kafka"],
+    location: "Boston, MA",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "18",
+    name: "Isabella Martinez",
+    bio: "Data scientist with expertise in machine learning and analytics.",
+    avatar: "https://i.pravatar.cc/150?img=24",
+    skills: ["Python", "Machine Learning", "Data Analysis"],
+    techStack: ["TensorFlow", "Pandas"],
+    location: "Seattle, WA",
+    openToCollaborate: true,
+    status: "offline"
+  },
+  {
+    id: "19",
+    name: "Lucas Brown",
+    bio: "Blockchain developer with experience in DeFi applications.",
+    avatar: "https://i.pravatar.cc/150?img=25",
+    skills: ["Solidity", "Web3", "DeFi"],
+    techStack: ["Ethereum", "Hardhat"],
+    location: "New York, NY",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "20",
+    name: "Charlotte Lee",
+    bio: "UI/UX designer with a focus on accessibility and user experience.",
+    avatar: "https://i.pravatar.cc/150?img=26",
+    skills: ["Figma", "UI Design", "Accessibility"],
+    techStack: ["Adobe XD", "Sketch"],
+    location: "San Francisco, CA",
+    openToCollaborate: true,
+    status: "offline"
+  },
+  {
+    id: "21",
+    name: "Benjamin Garcia",
+    bio: "Full-stack developer with expertise in modern web technologies.",
+    avatar: "https://i.pravatar.cc/150?img=27",
+    skills: ["React", "Node.js", "TypeScript"],
+    techStack: ["Next.js", "GraphQL"],
+    location: "Chicago, IL",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "22",
+    name: "Amelia Wilson",
+    bio: "Mobile developer specializing in cross-platform applications.",
+    avatar: "https://i.pravatar.cc/150?img=28",
+    skills: ["React Native", "Flutter", "Mobile UI"],
+    techStack: ["Firebase", "Redux"],
+    location: "Austin, TX",
+    openToCollaborate: true,
+    status: "offline"
+  },
+  {
+    id: "23",
+    name: "Henry Chen",
+    bio: "Security engineer focused on application security.",
+    avatar: "https://i.pravatar.cc/150?img=29",
+    skills: ["Security", "Penetration Testing", "DevSecOps"],
+    techStack: ["OWASP", "Burp Suite"],
+    location: "Boston, MA",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "24",
+    name: "Victoria Kim",
+    bio: "Data engineer specializing in real-time data processing.",
+    avatar: "https://i.pravatar.cc/150?img=30",
+    skills: ["Apache Kafka", "Spark", "Python"],
+    techStack: ["Airflow", "Databricks"],
+    location: "Seattle, WA",
+    openToCollaborate: true,
+    status: "offline"
+  },
+  {
+    id: "25",
+    name: "Jack Thompson",
+    bio: "AR/VR developer creating immersive experiences.",
+    avatar: "https://i.pravatar.cc/150?img=31",
+    skills: ["Unity", "AR Kit", "VR Development"],
+    techStack: ["Oculus SDK", "Vuforia"],
+    location: "Los Angeles, CA",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "26",
+    name: "Sophie Anderson",
+    bio: "Machine learning engineer focused on computer vision.",
+    avatar: "https://i.pravatar.cc/150?img=32",
+    skills: ["Python", "TensorFlow", "OpenCV"],
+    techStack: ["PyTorch", "CUDA"],
+    location: "San Francisco, CA",
+    openToCollaborate: true,
+    status: "offline"
+  },
+  {
+    id: "27",
+    name: "Oliver Martinez",
+    bio: "IoT developer working on smart home solutions.",
+    avatar: "https://i.pravatar.cc/150?img=33",
+    skills: ["Embedded Systems", "C++", "IoT"],
+    techStack: ["Arduino", "Raspberry Pi"],
+    location: "Austin, TX",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "28",
+    name: "Emma Davis",
+    bio: "Cloud security architect with focus on AWS.",
+    avatar: "https://i.pravatar.cc/150?img=34",
+    skills: ["AWS Security", "IAM", "Cloud Security"],
+    techStack: ["AWS WAF", "CloudWatch"],
+    location: "Washington, DC",
+    openToCollaborate: true,
+    status: "offline"
+  },
+  {
+    id: "29",
+    name: "Liam Wilson",
+    bio: "Quantum computing researcher and developer.",
+    avatar: "https://i.pravatar.cc/150?img=35",
+    skills: ["Quantum Computing", "Python", "Physics"],
+    techStack: ["Qiskit", "Q#"],
+    location: "Boston, MA",
+    openToCollaborate: true,
+    status: "online"
+  },
+  {
+    id: "30",
+    name: "Zoe Taylor",
+    bio: "Robotics engineer specializing in autonomous systems.",
+    avatar: "https://i.pravatar.cc/150?img=36",
+    skills: ["ROS", "Computer Vision", "Control Systems"],
+    techStack: ["Python", "C++"],
+    location: "Seattle, WA",
     openToCollaborate: true,
     status: "offline"
   }
 ];
 
-// Mock messages
-const mockMessages = {
-  "1": [
-    {
+// Mock messages with initial messages for each profile
+const mockMessages = Object.fromEntries(
+  mockProfiles.map(profile => [
+    profile.id,
+    [{
       id: "1",
-      senderId: "1",
-      content: "Hey there! I saw your profile and I'm interested in collaborating on a project.",
-      timestamp: new Date(Date.now() - 1000 * 60 * 30),
+      senderId: profile.id,
+      content: `Hi! I'm ${profile.name}. Would love to collaborate on projects related to ${profile.skills[0]}.`,
+      timestamp: new Date(Date.now() - 1000 * 60 * (30 * parseInt(profile.id))),
       isRead: true,
-    },
-    {
-      id: "2",
-      senderId: "currentUser",
-      content: "Hi! That sounds great. What kind of project are you thinking about?",
-      timestamp: new Date(Date.now() - 1000 * 60 * 25),
-      isRead: true,
-    },
-    {
-      id: "3",
-      senderId: "1",
-      content: "I'm working on a hackathon project for next weekend. It's a web app for real-time collaboration.",
-      timestamp: new Date(Date.now() - 1000 * 60 * 20),
-      isRead: true,
-    }
-  ],
-  "2": [
-    {
-      id: "1",
-      senderId: "2",
-      content: "Hello! I'm interested in your React Native experience.",
-      timestamp: new Date(Date.now() - 1000 * 60 * 60),
-      isRead: true,
-    },
-    {
-      id: "2",
-      senderId: "currentUser",
-      content: "Hi Jane! I'd be happy to discuss React Native projects.",
-      timestamp: new Date(Date.now() - 1000 * 60 * 55),
-      isRead: true,
-    }
-  ]
-};
+    }]
+  ])
+);
 
 const ConnectionDetails = () => {
   const { id } = useParams();

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { 
   Github, 
   Twitter, 
@@ -14,6 +14,8 @@ const Footer = () => {
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [error, setError] = useState("");
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,11 +36,11 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-white border-t border-gray-100 py-12">
+    <footer className={`bg-white border-t border-gray-100 py-12 ${!isHomePage ? 'hidden md:block' : ''}`}>
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {/* Logo and tagline */}
-          <div className="col-span-1 md:col-span-1">
+          <div className="col-span-1 sm:col-span-2 md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center">
                 <span className="text-white font-bold">TF</span>
@@ -61,52 +63,55 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick links */}
-          <div>
-            <h3 className="font-bold text-black mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/" className="text-gray-600 hover:text-black transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/discover" className="text-gray-600 hover:text-black transition-colors">
-                  Discover
-                </Link>
-              </li>
-              <li>
-                <Link to="/connect" className="text-gray-600 hover:text-black transition-colors">
-                  Connect
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {/* Quick links and Resources side by side */}
+          <div className="grid grid-cols-2 gap-8 sm:col-span-2 md:col-span-2">
+            {/* Quick links */}
+            <div>
+              <h3 className="font-bold text-black mb-4">Quick Links</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/" className="text-gray-600 hover:text-black transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/discover" className="text-gray-600 hover:text-black transition-colors">
+                    Discover
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/connect" className="text-gray-600 hover:text-black transition-colors">
+                    Connect
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-          {/* Resources */}
-          <div>
-            <h3 className="font-bold text-black mb-4">Resources</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/blog" className="text-gray-600 hover:text-black transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link to="/support" className="text-gray-600 hover:text-black transition-colors">
-                  Support
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="text-gray-600 hover:text-black transition-colors">
-                  Terms & Privacy
-                </Link>
-              </li>
-            </ul>
+            {/* Resources */}
+            <div>
+              <h3 className="font-bold text-black mb-4">Resources</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/blog" className="text-gray-600 hover:text-black transition-colors">
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/support" className="text-gray-600 hover:text-black transition-colors">
+                    Support
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/terms" className="text-gray-600 hover:text-black transition-colors">
+                    Terms & Privacy
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Newsletter */}
-          <div>
+          <div className="col-span-1 sm:col-span-2 md:col-span-1">
             <h3 className="font-bold text-black mb-4">Stay Updated</h3>
             {isSubscribed ? (
               <div className="text-center py-4">

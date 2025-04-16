@@ -102,7 +102,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <Button variant="ghost" size="icon" onClick={toggleMenu}>
+            <Button variant="ghost" size="icon" onClick={toggleMenu} className="text-black">
               {isOpen ? (
                 <X className="h-6 w-6" />
               ) : (
@@ -114,15 +114,15 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden mt-4 pb-4 animate-fade-in">
+          <div className="md:hidden mt-4 pb-4 animate-fade-in bg-white">
             <div className="flex flex-col space-y-2">
               {NavLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
                   className={cn(
-                    "nav-link flex items-center gap-2 px-4 py-3",
-                    isActive(link.path) && "nav-link-active"
+                    "nav-link flex items-center gap-2 px-4 py-3 text-black",
+                    isActive(link.path) && "nav-link-active bg-primary text-white"
                   )}
                   onClick={() => setIsOpen(false)}
                 >
@@ -144,7 +144,7 @@ const Navbar = () => {
                     {user?.name ? getInitials(user.name) : <User className="w-5 h-5" />}
                   </Button>
                   <Button
-                    className="w-full"
+                    className="w-full gradient-bg text-white"
                     onClick={() => {
                       logout();
                       setIsOpen(false);
@@ -157,7 +157,7 @@ const Navbar = () => {
                 <div className="border-t border-gray-100 my-2 pt-2 space-y-2">
                   <Link
                     to="/login"
-                    className="block px-4 py-3 text-center border border-gray-200 rounded-md"
+                    className="block px-4 py-3 text-center border border-gray-200 rounded-md text-black hover:bg-gray-50"
                     onClick={() => setIsOpen(false)}
                   >
                     Login

@@ -284,7 +284,7 @@ const Profile = () => {
           <div className="relative">
             <div className="h-48 bg-gradient-to-r from-hackathon-blue to-hackathon-purple"></div>
             
-            <div className="absolute bottom-0 left-0 w-full transform translate-y-[70%] px-6 sm:px-8 flex flex-col sm:flex-row items-center sm:items-end gap-4">
+            <div className="absolute bottom-0 left-0 w-full transform translate-y-[50%] px-6 sm:px-8 flex flex-col sm:flex-row items-center sm:items-end gap-4">
               <img
                 src={editedUser.avatar}
                 alt={editedUser.name}
@@ -312,7 +312,7 @@ const Profile = () => {
           </div>
           
           {/* Profile stats */}
-          <div className="mt-20 px-6 sm:px-8 grid grid-cols-3 border-b border-gray-100">
+          <div className="mt-28 px-6 sm:px-8 grid grid-cols-3 border-b border-gray-100">
             <div className="py-4 text-center">
               <p className="text-2xl font-bold text-gray-900">{editedUser.connections}</p>
               <p className="text-sm text-muted-foreground">Connections</p>
@@ -437,43 +437,45 @@ const Profile = () => {
                     {mockHackathons
                       .filter(h => h.status === "upcoming")
                       .map(hackathon => (
-                        <div key={hackathon.id} className="hackathon-card mb-4 border-hackathon-blue bg-white">
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <h3 className="font-semibold text-lg text-black">{hackathon.name}</h3>
-                              <p className="text-sm text-gray-700 mb-2">{hackathon.description}</p>
+                        <div key={hackathon.id} className="p-4 mb-4 border rounded-lg border-hackathon-blue bg-white space-y-3">
+                          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                            <div className="space-y-1">
+                              <h3 className="font-semibold text-base sm:text-lg text-black">{hackathon.name}</h3>
+                              <p className="text-sm text-gray-700">{hackathon.description}</p>
                             </div>
-                            <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                            <span className="inline-flex px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full self-start">
                               {hackathon.isOnline ? "Online" : "In Person"}
                             </span>
                           </div>
                           
-                          <div className="flex items-center gap-2 text-sm text-gray-700 mt-2">
-                            <Calendar className="h-4 w-4" />
-                            <span>
-                              {formatDate(hackathon.startDate)} - {formatDate(hackathon.endDate)}
-                            </span>
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2 text-sm text-gray-700">
+                              <Calendar className="h-4 w-4 flex-shrink-0" />
+                              <span className="text-xs sm:text-sm">
+                                {formatDate(hackathon.startDate)} - {formatDate(hackathon.endDate)}
+                              </span>
+                            </div>
+                            
+                            {!hackathon.isOnline && (
+                              <div className="flex items-center gap-2 text-sm text-gray-700">
+                                <MapPin className="h-4 w-4 flex-shrink-0" />
+                                <span className="text-xs sm:text-sm">{hackathon.location}</span>
+                              </div>
+                            )}
                           </div>
                           
-                          {!hackathon.isOnline && (
-                            <div className="flex items-center gap-2 text-sm text-gray-700 mt-1">
-                              <MapPin className="h-4 w-4" />
-                              <span>{hackathon.location}</span>
-                            </div>
-                          )}
-                          
-                          <div className="flex gap-2 mt-4">
+                          <div className="flex flex-col sm:flex-row gap-2 pt-2">
                             <Button 
                               variant="outline" 
                               size="sm" 
-                              className="bg-white text-black hover:bg-[#655AC4] hover:text-white"
+                              className="w-full sm:w-auto bg-white text-black hover:bg-[#655AC4] hover:text-white"
                               onClick={() => handleFindTeammates(hackathon.id)}
                             >
                               Find Teammates
                             </Button>
                             <Button 
                               size="sm"
-                              className="bg-[#655AC4] text-white hover:bg-[#655AC4]/90"
+                              className="w-full sm:w-auto bg-[#655AC4] text-white hover:bg-[#655AC4]/90"
                               onClick={() => handleViewDetails(hackathon.id)}
                             >
                               Details
@@ -589,9 +591,9 @@ const Profile = () => {
               
               <TabsContent value="portfolio" className="animate-fade-in text-[#64748b]">
                 <div className="space-y-6">
-                  <div className="flex justify-between items-center">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <h2 className="text-xl font-semibold text-black">Portfolio</h2>
-                    <Button onClick={handleAddProject} className="flex items-center gap-2">
+                    <Button onClick={handleAddProject} className="w-full sm:w-auto flex items-center justify-center gap-2">
                       <Upload className="h-4 w-4" />
                       Add Project
                     </Button>
@@ -601,16 +603,14 @@ const Profile = () => {
                       onChange={handleFileChange}
                       className="hidden"
                       multiple
-                      webkitdirectory=""
-                      directory=""
                     />
                   </div>
                   
                   {projects.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       {projects.map((project, index) => (
-                        <div key={index} className="bg-white p-4 rounded-lg shadow-sm">
-                          <h3 className="font-semibold text-black mb-2">{project.name}</h3>
+                        <div key={index} className="bg-gray-50 p-4 rounded-lg">
+                          <h3 className="font-semibold text-black mb-2 text-base">{project.name}</h3>
                           <div className="text-sm text-gray-600">
                             {project.files.length} files
                           </div>
@@ -618,10 +618,10 @@ const Profile = () => {
                       ))}
                     </div>
                   ) : (
-                <div className="text-center py-12">
-                  <p className="text-muted-foreground mb-6">
+                    <div className="text-center py-8 sm:py-12 px-4">
+                      <p className="text-muted-foreground text-sm sm:text-base">
                         No projects added yet. Click "Add Project" to upload your project files.
-                  </p>
+                      </p>
                     </div>
                   )}
                 </div>

@@ -8,7 +8,8 @@ import {
   UserPlus, 
   Users, 
   Send, 
-  Clock
+  Clock,
+  ArrowLeft
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -288,9 +289,10 @@ const formatDate = (date: Date) => {
 const Connect = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("messages");
-  const [selectedChat, setSelectedChat] = useState<string | null>("1"); // Set to first connection by default
+  const [selectedChat, setSelectedChat] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState<Record<string, any[]>>(MOCK_MESSAGES);
+  const [showChat, setShowChat] = useState(false);
 
   // Filter connections based on search
   const filteredConnections = MOCK_CONNECTIONS.filter(connection =>
@@ -303,6 +305,15 @@ const Connect = () => {
   // Get messages for the selected chat
   const activeMessages = messages[selectedChat] || [];
 
+  const handleChatSelect = (chatId: string) => {
+    setSelectedChat(chatId);
+    setShowChat(true);
+  };
+
+  const handleBackToContacts = () => {
+    setShowChat(false);
+  };
+
   const handleSendMessage = () => {
     if (newMessage.trim() && selectedChat) {
       const newMessageObj = {
@@ -313,29 +324,11 @@ const Connect = () => {
         isRead: true,
       };
 
-      // Update the messages state
       setMessages(prev => ({
         ...prev,
         [selectedChat]: [...(prev[selectedChat] || []), newMessageObj]
       }));
 
-      // Update the last message in the connection
-      const updatedConnections = MOCK_CONNECTIONS.map(conn => {
-        if (conn.id === selectedChat) {
-          return {
-            ...conn,
-            lastMessage: newMessage.trim(),
-            timestamp: new Date(),
-            unread: 0
-          };
-        }
-        return conn;
-      });
-
-      // In a real app, you would send this to your backend API
-      console.log("Sending message:", newMessage);
-      
-      // Clear the input
       setNewMessage("");
     }
   };
@@ -344,8 +337,8 @@ const Connect = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-0 md:px-4 py-8">
         <div className="bg-white rounded-xl shadow-sm overflow-hidden flex flex-col md:flex-row">
-          {/* Sidebar */}
-          <div className="w-full md:w-1/3 xl:w-1/4 border-r border-gray-100">
+          {/* Sidebar - Always visible on desktop, visible on mobile when chat is not shown */}
+          <div className={`w-full md:w-1/3 xl:w-1/4 border-r border-gray-100 ${showChat ? 'hidden md:block' : 'block'}`}>
             <div className="p-4">
               <h1 className="text-2xl font-bold mb-4 text-black">Connect</h1>
               
@@ -394,7 +387,7 @@ const Connect = () => {
                                 ? "bg-gray-100"
                                 : "hover:bg-gray-50"
                             }`}
-                            onClick={() => setSelectedChat(connection.id)}
+                            onClick={() => handleChatSelect(connection.id)}
                           >
                             <div className="relative">
                               <img
@@ -489,13 +482,21 @@ const Connect = () => {
             </div>
           </div>
           
-          {/* Chat Area */}
-          <div className="flex-1 flex flex-col">
+          {/* Chat Area - Hidden on mobile by default, shown when chat is selected */}
+          <div className={`flex-1 flex flex-col ${!showChat ? 'hidden md:flex' : 'flex'}`}>
             {selectedChat && activeConnection && activeTab === "messages" ? (
               <>
-                {/* Chat header */}
+                {/* Chat header with back button on mobile */}
                 <div className="p-4 border-b border-gray-100 flex items-center justify-between">
                   <div className="flex items-center gap-3">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="md:hidden mr-2"
+                      onClick={handleBackToContacts}
+                    >
+                      <ArrowLeft className="h-5 w-5" />
+                    </Button>
                     <div className="relative">
                       <img
                         src={activeConnection.avatar}
