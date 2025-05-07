@@ -39,7 +39,7 @@ teamup/
 
 ## 📸 Screenshots
 
-<img src="public/screenshot-home.png" alt="Homepage Screenshot" width="100%" />
+<img src="teamup.jpg" alt="Homepage Screenshot" width="100%" />
 <img src="public/screenshot-explore.png" alt="Explore Developers Screenshot" width="100%" />
 
 ## 🧑‍💻 Getting Started
