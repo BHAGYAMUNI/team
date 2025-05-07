@@ -20,6 +20,12 @@ TeamUp is an intuitive web platform designed to help individuals form teams for 
 - **Three.js** – For creating dynamic 3D visual backgrounds.
 - **Framer Motion** – For smooth animations and transitions.
 
+## 📌 Use Cases
+
+ -  A developer wants to find a designer for a UI-heavy project in a hackathon.
+ -  A beginner is looking for a team that can help guide them through their first event. 
+ -  A group of users want to assemble a team based on complementary skills and hackathon interests.
+
 ## 📁 Project Structure
 
 teamup/
@@ -60,3 +66,5 @@ teamup/
     
 ## 📄 License
     Let me know if you’d like a sample `LICENSE` file or a short GitHub project description as well!
+
+   **Built during a hackathon to solve a real-world challenge of team formation. ✨**
