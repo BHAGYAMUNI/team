@@ -40,7 +40,8 @@ teamup/
 ## 📸 Screenshots
 
 <img src="teamup.jpg" alt="Homepage Screenshot" width="100%" />
-<img src="public/screenshot-explore.png" alt="Explore Developers Screenshot" width="100%" />
+<img src="Hackthons.jpg" alt="Hackathons Page Screenshot" width="100%" />
+<img src="Connect.jpg" alt="Connect Page Screenshot" width="100%" />
 
 ## 🧑‍💻 Getting Started
 
